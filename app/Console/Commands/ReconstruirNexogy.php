@@ -46,6 +46,7 @@ class ReconstruirNexogy extends Command
 
             if (LlamadaNexogy::where('CallId', '=', $nuevoString)->exists()) {
                 echo 'registro ya existe';
+                Storage::disk('ftp')->move( $file, 'NEXOGY_PROCESADOS/' . $file);
             } else {
                 try {
                     $client = new SoapClient('https://api.callcabinet.com/APIServices/CallListingService.svc?wsdl');
